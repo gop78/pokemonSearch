@@ -16,7 +16,6 @@ public class PokemonInfo {
     private String heightUnit = "cm";
     private String weightUnit = "kg";
 
-    //
     private int setHeight(int height) {
         return this.height = height * 10;
     }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokemon Info</title>
+</head>
+<body>
+<h1>Pokemon Info</h1>
+<div th:if="${pokemonInfoList}" th:each="pokemonInfo : ${pokemonInfoList}">
+  <h2>Name: <span th:text="${pokemonInfo.name}"></span></h2>
+  <h3>Types:</h3>
+  <ul>
+    <li th:each="type : ${pokemonInfo.types}" th:text="${type.type.name}"></li>
+  </ul>
+  <p>Height: <span th:text="${pokemonInfo.height}"></span> <span th:text="${pokemonInfo.heightUnit}"></span></p>
+  <p>Weight: <span th:text="${pokemonInfo.weight}"></span> <span th:text="${pokemonInfo.weightUnit}"></span></p>
+  <img th:if="${pokemonInfo.imageUrl}" th:src="${pokemonInfo.imageUrl}" alt="Pokemon Image">
+</div>
+<div th:if="${error}">
+  <h2><span th:text="${error}"></span></h2>
+</div>
+<a href="/">Search Again</a>
+</body>
+</html>

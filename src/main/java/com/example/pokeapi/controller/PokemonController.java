@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import java.util.List;
+
 @Controller
 @Log4j2
 public class PokemonController {
@@ -20,7 +22,9 @@ public class PokemonController {
     }
 
     @GetMapping("/")
-    public String showSearchPage() {
+    public String showSearchPage(Model model, @RequestParam(defaultValue = "1") int startIndex, @RequestParam(defaultValue = "10") int limitIndex) {
+        List<PokemonInfo> pokemonInfoList =  pokeApiService.pokemonByIndex(startIndex, limitIndex);
+        model.addAttribute("pokemonInfoList", pokemonInfoList);
         return "search";
     }
 
@@ -28,7 +32,7 @@ public class PokemonController {
     public String searchPokemon(@RequestParam String name, Model model) {
         PokemonInfo pokemonInfo = null;
         try {
-            pokemonInfo = pokeApiService.getPokemonInfo(name.toLowerCase().trim()).block();
+            pokemonInfo = pokeApiService.getPokemonInfoByName(name.toLowerCase().trim()).block();
         } catch (WebClientResponseException e) {
             log.error(e);
             model.addAttribute("error", "Not Found " + name);
@@ -37,6 +41,13 @@ public class PokemonController {
 
         model.addAttribute("pokemonInfo", pokemonInfo);
         return "pokemon";
+    }
+
+    @GetMapping("/pokemonByIndex")
+    public String pokemonByIndex(Model model, @RequestParam int startIndex, @RequestParam int limitIndex) {
+        List<PokemonInfo> pokemonInfoList =  pokeApiService.pokemonByIndex(startIndex, limitIndex);
+        model.addAttribute("pokemonInfoList", pokemonInfoList);
+        return "pokemonList";
     }
 }
 
