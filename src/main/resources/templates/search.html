@@ -2,6 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <script defer src="/js/bootstrap.min.js"></script>
+
   <title>Pokemon Search</title>
 </head>
 <body>
@@ -11,25 +17,28 @@
   <button>검색</button>
 </form>
 
-<!--<form action="/pokemonByIndex" method="get">-->
-<!--  <button>전체 조회</button>-->
-<!--</form>-->
+<form action="/pokemonByIndex" method="get">
+  <button>전체 조회</button>
+</form>
 
 <h1>Pokemon Info</h1>
-<ul style="list-style: none;">
-  <li th:if="${pokemonInfoList}" th:each="pokemonInfo : ${pokemonInfoList}" style="float: left">
-    <div>
-      <h2>Name: <span th:text="${pokemonInfo.name}"></span></h2>
-      <h3>Types:</h3>
-      <ul>
-        <li th:each="type : ${pokemonInfo.types}" th:text="${type.type.name}"></li>
-      </ul>
-      <p>Height: <span th:text="${pokemonInfo.height}"></span> <span th:text="${pokemonInfo.heightUnit}"></span></p>
-      <p>Weight: <span th:text="${pokemonInfo.weight}"></span> <span th:text="${pokemonInfo.weightUnit}"></span></p>
-      <img th:if="${pokemonInfo.imageUrl}" th:src="${pokemonInfo.imageUrl}" alt="Pokemon Image">
+
+<div class="row row-cols-4 row-cols-md-4 g-4">
+  <div class="col" th:if="${pokemonInfoList}" th:each="pokemonInfo : ${pokemonInfoList}">
+    <div class="card h-100">
+      <img th:if="${pokemonInfo.imageUrl}" th:src="${pokemonInfo.imageUrl}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h3 class="card-title">Name: <span th:text="${pokemonInfo.name}"></span></h3>
+        <div>
+          <h5>Types</h5>
+          <p class="card-text" th:each="type, typeStat : ${pokemonInfo.types}" th:text="${typeStat.index + 1} + '. ' + ${type.type.name}"></p>
+          <p class="card-text">Height: <span th:text="${pokemonInfo.height}"></span> <span th:text="${pokemonInfo.heightUnit}"></span></p>
+          <p class="card-text">Weight: <span th:text="${pokemonInfo.weight}"></span> <span th:text="${pokemonInfo.weightUnit}"></span></p>
+        </div>
+      </div>
     </div>
-  </li>
-</ul>
+  </div>
+</div>
 
 <div th:if="${error}">
   <h2><span th:text="${error}"></span></h2>
