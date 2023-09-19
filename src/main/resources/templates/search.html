@@ -5,43 +5,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <script defer src="/js/bootstrap.min.js"></script>
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+  <script defer src="/js/bootstrap/bootstrap.min.js"></script>
+  <!-- // bootstrap -->
 
-  <title>Pokemon Search</title>
+  <link rel="stylesheet" href="/css/pokemon/pokemon.css">
+
+  <title>Pokemon Book</title>
 </head>
 <body>
-<h1>Pokemon Search</h1>
-<form action="/pokemon" method="get">
-  <input type="text" name="name" placeholder="Enter Pokemon Name">
-  <button>검색</button>
-</form>
-
-<form action="/pokemonByIndex" method="get">
-  <button>전체 조회</button>
-</form>
-
-<h1>Pokemon Info</h1>
-
-<div class="row row-cols-4 row-cols-md-4 g-4">
-  <div class="col" th:if="${pokemonInfoList}" th:each="pokemonInfo : ${pokemonInfoList}">
-    <div class="card h-100">
-      <img th:if="${pokemonInfo.imageUrl}" th:src="${pokemonInfo.imageUrl}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h3 class="card-title">Name: <span th:text="${pokemonInfo.name}"></span></h3>
-        <div>
-          <h5>Types</h5>
-          <p class="card-text" th:each="type, typeStat : ${pokemonInfo.types}" th:text="${typeStat.index + 1} + '. ' + ${type.type.name}"></p>
-          <p class="card-text">Height: <span th:text="${pokemonInfo.height}"></span> <span th:text="${pokemonInfo.heightUnit}"></span></p>
-          <p class="card-text">Weight: <span th:text="${pokemonInfo.weight}"></span> <span th:text="${pokemonInfo.weightUnit}"></span></p>
-        </div>
+  <div class="container page-container">
+    <div class="row gutters">
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-12" th:if="${pokemonInfoList}" th:each="pokemonInfo : ${pokemonInfoList}">
+        <figure class="user-card green">
+          <figcaption>
+            <img th:if="${pokemonInfo.imageUrl}" th:src="${pokemonInfo.imageUrl}" th:alt="${pokemonInfo.name}" class="profile">
+            <h5 id="pokeName" th:text="${pokemonInfo.name}"></h5>
+            <h6 class="badge text-bg-primary">@movies</h6>
+            <h6 class="badge text-bg-primary">@movies</h6>
+            <h6 class="badge text-bg-primary">@movies</h6>
+            <ul class="contacts">
+              <li>
+                <p th:text="|heigth: ${pokemonInfo.height}${pokemonInfo.heightUnit}|"></p>
+              </li>
+              <li>
+                <p th:text="|weight: ${pokemonInfo.weight}${pokemonInfo.weightUnit}|"></p>
+              </li>
+            </ul>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </div>
-</div>
-
-<div th:if="${error}">
-  <h2><span th:text="${error}"></span></h2>
-</div>
 </body>
 </html>
