@@ -22,7 +22,7 @@ public class PokemonController {
     }
 
     @GetMapping("/")
-    public String showSearchPage(Model model, @RequestParam(defaultValue = "1") int startIndex, @RequestParam(defaultValue = "10") int limitIndex) {
+    public String showSearchPage(Model model, @RequestParam(value = "startIndex", defaultValue = "1") int startIndex, @RequestParam(value = "limitIndex", defaultValue = "12") int limitIndex) {
         List<PokemonInfo> pokemonInfoList =  pokeApiService.pokemonByIndex(startIndex, limitIndex);
         model.addAttribute("pokemonInfoList", pokemonInfoList);
         return "search";

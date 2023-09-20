@@ -22,14 +22,15 @@
 <body>
   <div class="container page-container">
     <div class="row gutters">
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-12" th:if="${pokemonInfoList}" th:each="pokemonInfo : ${pokemonInfoList}">
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-12 pokemonCard" th:if="${pokemonInfoList}" th:each="pokemonInfo : ${pokemonInfoList}">
         <figure class="user-card green">
           <figcaption>
             <img th:if="${pokemonInfo.imageUrl}" th:src="${pokemonInfo.imageUrl}" th:alt="${pokemonInfo.name}" class="profile">
-            <h5 id="pokeName" th:text="${pokemonInfo.name}"></h5>
-            <h6 class="badge text-bg-primary">@movies</h6>
-            <h6 class="badge text-bg-primary">@movies</h6>
-            <h6 class="badge text-bg-primary">@movies</h6>
+            <h4 th:text="${pokemonInfo.name}"></h4>
+            <th:block th:each="type : ${pokemonInfo.types}">
+              <input type="hidden" class="types" th:value="${type.type.name}">
+            </th:block>
+            <div class="iconWrapp"></div>
             <ul class="contacts">
               <li>
                 <p th:text="|heigth: ${pokemonInfo.height}${pokemonInfo.heightUnit}|"></p>
