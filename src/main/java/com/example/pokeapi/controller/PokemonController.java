@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @Log4j2
@@ -21,20 +21,31 @@ public class PokemonController {
         this.pokeApiService = pokeApiService;
     }
 
+    /**
+     * 검색 페이지
+     * @param model
+     * @param startIndex
+     * @param limitIndex
+     * @return
+     */
     @GetMapping("/")
-    public String showSearchPage(Model model, @RequestParam(value = "startIndex", defaultValue = "1") int startIndex, @RequestParam(value = "limitIndex", defaultValue = "12") int limitIndex) {
+    public String showSearchPage(Model model, @RequestParam(value = "startIndex", defaultValue = "1") int startIndex, @RequestParam(value = "limitIndex", defaultValue = "60") int limitIndex) {
         List<PokemonInfo> pokemonInfoList =  pokeApiService.pokemonByIndex(startIndex, limitIndex);
         model.addAttribute("pokemonInfoList", pokemonInfoList);
         return "search";
     }
 
+    /**
+     * 검색 페이지
+     * @param name
+     * @param model
+     * @return
+     */
     @GetMapping("/pokemon")
     public String searchPokemon(@RequestParam String name, Model model) {
-        PokemonInfo pokemonInfo = null;
-        try {
-            pokemonInfo = pokeApiService.getPokemonInfoByName(name.toLowerCase().trim()).block();
-        } catch (WebClientResponseException e) {
-            log.error(e);
+
+        PokemonInfo pokemonInfo = pokeApiService.getPokemonInfoByName(name.toLowerCase().trim()).onErrorComplete().block();
+        if (Objects.isNull(pokemonInfo)) {
             model.addAttribute("error", "Not Found " + name);
             return "pokemon";
         }
@@ -43,11 +54,28 @@ public class PokemonController {
         return "pokemon";
     }
 
+    /**
+     * 인덱스 검색 목록
+     * @param model
+     * @param startIndex
+     * @param limitIndex
+     * @return
+     */
     @GetMapping("/pokemonByIndex")
     public String pokemonByIndex(Model model, @RequestParam int startIndex, @RequestParam int limitIndex) {
         List<PokemonInfo> pokemonInfoList =  pokeApiService.pokemonByIndex(startIndex, limitIndex);
         model.addAttribute("pokemonInfoList", pokemonInfoList);
         return "pokemonList";
+    }
+
+    /**
+     * 로그인 페이지
+     * @param model
+     * @return
+     */
+    @GetMapping("/login")
+    public String login(Model model) {
+        return "login";
     }
 }
 
