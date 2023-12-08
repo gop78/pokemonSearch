@@ -7,6 +7,8 @@ import java.util.List;
 @Data
 public class PokemonInfo {
 
+    private int id;
+    private String status;
     private String name;
     private List<PokemonType> types;
     private PokemonSprites sprites;
@@ -33,7 +35,6 @@ public class PokemonInfo {
     public static class PokemonTypeDetail {
         private String name;
     }
-
 
 }
 
