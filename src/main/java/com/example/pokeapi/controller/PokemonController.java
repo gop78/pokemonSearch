@@ -28,9 +28,10 @@ public class PokemonController {
      * @param limitIndex
      * @return
      */
-    @GetMapping("/")
-    public String showSearchPage(Model model, @RequestParam(value = "startIndex", defaultValue = "1") int startIndex, @RequestParam(value = "limitIndex", defaultValue = "60") int limitIndex) {
-        List<PokemonInfo> pokemonInfoList =  pokeApiService.pokemonByIndex(startIndex, limitIndex);
+    @GetMapping
+    public String list(Model model, @RequestParam(value = "startIndex", defaultValue = "1") int startIndex,
+                       @RequestParam(value = "limitIndex", defaultValue = "150") int limitIndex) {
+        List<PokemonInfo> pokemonInfoList =  pokeApiService.getPokemonList();
         model.addAttribute("pokemonInfoList", pokemonInfoList);
         return "search";
     }
@@ -57,13 +58,11 @@ public class PokemonController {
     /**
      * 인덱스 검색 목록
      * @param model
-     * @param startIndex
-     * @param limitIndex
      * @return
      */
     @GetMapping("/pokemonByIndex")
-    public String pokemonByIndex(Model model, @RequestParam int startIndex, @RequestParam int limitIndex) {
-        List<PokemonInfo> pokemonInfoList =  pokeApiService.pokemonByIndex(startIndex, limitIndex);
+    public String pokemonByIndex(Model model) {
+        List<PokemonInfo> pokemonInfoList =  pokeApiService.getPokemonList();
         model.addAttribute("pokemonInfoList", pokemonInfoList);
         return "pokemonList";
     }
