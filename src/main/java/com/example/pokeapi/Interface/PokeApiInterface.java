@@ -1,6 +1,7 @@
 package com.example.pokeapi.Interface;
 
 import com.example.pokeapi.model.PokemonInfo;
+import com.example.pokeapi.propertie.ApiProperites;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -18,9 +19,7 @@ public class PokeApiInterface {
     private final WebClient webClient;
     private final ObjectMapper objectMapper;
 
-    private String url = "https://pokeapi.co/api/v2";
-
-    public PokeApiInterface(WebClient.Builder webClientBuilder, ObjectMapper objectMapper) {
+    public PokeApiInterface(WebClient.Builder webClientBuilder, ObjectMapper objectMapper, ApiProperites apiProperites) {
 
         // webClient 버퍼 크기 10MB로 확장
         ExchangeStrategies exchangeStrategies = ExchangeStrategies
@@ -28,6 +27,7 @@ public class PokeApiInterface {
                 .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(100 * 1024 * 1024))
                 .build();
 
+        String url = apiProperites.getUrl();
         this.webClient = webClientBuilder.baseUrl(url).exchangeStrategies(exchangeStrategies).build();
         this.objectMapper = objectMapper;
     }
