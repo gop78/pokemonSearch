@@ -60,8 +60,12 @@ figure.user-card .profile {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    max-width: 72px;
     margin-bottom: 20px;
+    width: 100%;
+    height: auto;
+    max-width: 200px; /* 원하는 최대 너비를 설정 */
+    max-height: 200px; /* 원하는 최대 높이를 설정 */
+    object-fit: cover; /* 이미지 비율을 유지하면서 크기 조정 */
 }
 
 figure.user-card h5 {
