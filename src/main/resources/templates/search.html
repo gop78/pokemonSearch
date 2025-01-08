@@ -1,48 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- bootstrap -->
-  <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
-  <script defer src="/js/bootstrap/bootstrap.min.js"></script>
-  <!-- // bootstrap -->
+<!-- header 영역 -->
+<th:block th:replace="/common/header :: header"></th:block>
+<!-- // header 영역 -->
 
-  <!-- jquery -->
-  <script defer src="/js/jquery/jquery-3.7.1.min.js"></script>
-  <!-- // jquery -->
-
-  <link rel="stylesheet" href="/css/pokemon/pokemon.css">
-  <script defer src="/js/pokemon/pokemon.js"></script>
-
-  <title>Pokemon Book</title>
-</head>
 <body>
-  <div class="container page-container">
-    <div class="row gutters">
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-12 pokemonCard" th:if="${pokemonInfoList}" th:each="pokemonInfo : ${pokemonInfoList}">
-        <figure class="user-card green">
-          <figcaption>
-            <img th:if="${pokemonInfo.imageUrl}" th:src="${pokemonInfo.imageUrl}" th:alt="${pokemonInfo.name}" class="profile">
-            <h4 th:text="${pokemonInfo.name}"></h4>
-            <th:block th:each="type : ${pokemonInfo.types}">
-              <input type="hidden" class="types" th:value="${type.type.name}">
-            </th:block>
-            <div class="iconWrapp"></div>
-            <ul class="contacts">
-              <li>
-                <p th:text="|키: ${pokemonInfo.height}${pokemonInfo.heightUnit}|"></p>
-              </li>
-              <li>
-                <p th:text="|몸무게: ${pokemonInfo.weight}${pokemonInfo.weightUnit}|"></p>
-              </li>
-            </ul>
-          </figcaption>
-        </figure>
-      </div>
+<!-- Top 영역 -->
+<div th:replace="/common/top :: top"></div>
+<!-- // Top 영역 -->
+
+<!-- Content 영역 -->
+<div class="container page-container">
+  <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 col-12 pokemonCard" th:if="${pokemonInfoList}" th:each="pokemonInfo : ${pokemonInfoList}">
+      <figure class="user-card green">
+        <figcaption>
+          <img th:if="${pokemonInfo.imageUrl}" th:src="${pokemonInfo.imageUrl}" th:alt="${pokemonInfo.name}" class="profile">
+          <h4 th:text="${pokemonInfo.name}"></h4>
+          <th:block th:each="type : ${pokemonInfo.types}">
+            <input type="hidden" class="types" th:value="${type.type.name}">
+          </th:block>
+          <div class="iconWrapp"></div>
+          <ul class="contacts">
+            <li>
+              <p th:text="|키: ${pokemonInfo.height}${pokemonInfo.heightUnit}|"></p>
+            </li>
+            <li>
+              <p th:text="|몸무게: ${pokemonInfo.weight}${pokemonInfo.weightUnit}|"></p>
+            </li>
+          </ul>
+        </figcaption>
+      </figure>
     </div>
   </div>
+</div>
+<!-- // Content 영역 -->
 </body>
 </html>
