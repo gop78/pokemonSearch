@@ -1,6 +1,7 @@
 package com.example.pokeapi.Interface;
 
 import com.example.pokeapi.model.PokemonInfo;
+import com.example.pokeapi.model.PokemonKoNames;
 import com.example.pokeapi.propertie.ApiProperites;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -84,5 +85,34 @@ public class PokeApiInterface {
 
     public Mono<PokemonInfo> fetchPokemonInfo(String url) {
         return fetchPokemonInfo(url, null);
+    }
+
+    /**
+     * JSON -> OBJECT로 변환 후 imageUrl 셋팅
+     * @param json
+     * @return
+     */
+    private Mono<PokemonKoNames> convertJsonToPokemonKoNames(String json) {
+        try {
+            PokemonKoNames pokemonInfo = objectMapper.readValue(json, PokemonKoNames.class);
+            return Mono.just(pokemonInfo);
+        } catch (JsonProcessingException e) {
+            return Mono.error(e);
+        }
+    }
+
+    /**
+     * pokeAPI 인터페이스 후 JSON -> OBJECT 형변환
+     * @param url
+     * @param val
+     * @return
+     */
+    public Mono<PokemonKoNames> fetchPokemonKoNames(String url, String val) {
+        return webClientInterface(url, val)
+                .flatMap(this::convertJsonToPokemonKoNames);
+    }
+
+    public Mono<PokemonKoNames> fetchPokemonKoNames(String url) {
+        return fetchPokemonKoNames(url, null);
     }
 }
