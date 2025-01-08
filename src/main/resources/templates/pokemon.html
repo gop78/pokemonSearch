@@ -12,8 +12,8 @@
   <ul>
     <li th:each="type : ${pokemonInfo.types}" th:text="${type.type.name}"></li>
   </ul>
-  <p>Height: <span th:text="${pokemonInfo.height}"></span> <span th:text="${pokemonInfo.heightUnit}"></span></p>
-  <p>Weight: <span th:text="${pokemonInfo.weight}"></span> <span th:text="${pokemonInfo.weightUnit}"></span></p>
+  <p>키: <span th:text="${pokemonInfo.height}"></span> <span th:text="${pokemonInfo.heightUnit}"></span></p>
+  <p>몸무게: <span th:text="${pokemonInfo.weight}"></span> <span th:text="${pokemonInfo.weightUnit}"></span></p>
   <img th:if="${pokemonInfo.imageUrl}" th:src="${pokemonInfo.imageUrl}" alt="Pokemon Image">
 </div>
 <div th:if="${error}">
