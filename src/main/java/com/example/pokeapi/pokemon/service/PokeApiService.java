@@ -1,6 +1,6 @@
-package com.example.pokeapi.service;
+package com.example.pokeapi.pokemon.service;
 
-import com.example.pokeapi.model.PokemonInfo;
+import com.example.pokeapi.pokemon.model.PokemonInfo;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 

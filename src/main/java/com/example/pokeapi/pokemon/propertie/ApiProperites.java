@@ -1,4 +1,4 @@
-package com.example.pokeapi.propertie;
+package com.example.pokeapi.pokemon.propertie;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

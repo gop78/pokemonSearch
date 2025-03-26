@@ -1,9 +1,9 @@
-package com.example.pokeapi.service.serviceImpl;
+package com.example.pokeapi.pokemon.service.serviceImpl;
 
-import com.example.pokeapi.Interface.PokeApiInterface;
-import com.example.pokeapi.model.PokemonInfo;
-import com.example.pokeapi.model.PokemonKoNames;
-import com.example.pokeapi.service.PokeApiService;
+import com.example.pokeapi.pokemon.client.PokeApiInterface;
+import com.example.pokeapi.pokemon.model.PokemonInfo;
+import com.example.pokeapi.pokemon.model.PokemonKoNames;
+import com.example.pokeapi.pokemon.service.PokeApiService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

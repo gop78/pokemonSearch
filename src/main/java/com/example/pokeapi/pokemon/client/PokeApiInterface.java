@@ -1,8 +1,8 @@
-package com.example.pokeapi.Interface;
+package com.example.pokeapi.pokemon.client;
 
-import com.example.pokeapi.model.PokemonInfo;
-import com.example.pokeapi.model.PokemonKoNames;
-import com.example.pokeapi.propertie.ApiProperites;
+import com.example.pokeapi.pokemon.model.PokemonInfo;
+import com.example.pokeapi.pokemon.model.PokemonKoNames;
+import com.example.pokeapi.pokemon.propertie.ApiProperites;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.buffer.DataBuffer;

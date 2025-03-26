@@ -1,4 +1,4 @@
-package com.example.pokeapi.model;
+package com.example.pokeapi.pokemon.model;
 
 import lombok.Data;
 
